@@ -1,58 +1,65 @@
 package neuralNet;
 
 import java.util.Random;
+import java.lang.*;
 
 public class NeuralNet {
 
-	public static void main(String[] args) {
+  	// node[i][j]
+	private double[][] node; // the output value of the j-th node of the i-th layer
+      
+  	// weight[i][j][k] -- weight[layer][neuron-position left][neuron-position right]
+	private double[][][] weight; // the synopsys from j-th node of i-th layer to k-th node of (i+1)-th layer
 
-		NeuralNet nn = new NeuralNet();
-		nn.Initialize();
+	private IActivationFunction af;
+	
+  	public NeuralNet(int[] layerSize, IActivationFunction af) throws Exception {
+  		
+  		if (layerSize.length < 2)
+  			throw new Exception("Cannot have less than 2 layers");
+  		
+  		this.af = af;
+  		
+  		node = new double[layerSize.length][];        // allocates memory for layer array
+    	for (int i = 0; i < layerSize.length; i++)  
+        	node[i] = new double[layerSize[i]];
+      
+    	weight = new double[layerSize.length-1][][];
+    	for (int i = 0; i < layerSize.length-1; i++)   // allocates memory for weight array
+          	weight[i] = new double[layerSize[i]][layerSize[i+1]];      
+      	
+      	for (int i = 0; i < weight.length; i++)          // allocate random weight to each synopsys
+          	for (int j = 0; j < weight[i].length; j++)
+              	for (int k = 0; k < weight[i][j].length; k++)
+              		weight[i][j][k] = this.RandomWeight();
+    }
+  
+  
+    public void DoTraining(double[] input, double[] output) {
+      	
+      	SetInputNeurons(input);     // set input neurons according to input data
+      
+  		DoForwardPropagation();
+      	DoBackwardPropagation();
+  	}
+  
+	protected void SetInputNeurons(double[] values) {
+      	for (int i = 0; i < values.length; i++) {
+      		node[0][i] = values[i];
+      	}
 	}
 
-	double[] inputLayer = new double[2];
-	double[] hiddenLayer = new double[3];
-	double outputLayer;
-	double[][] weight = new double[3][3];
-
-	public void SetInputNeurons(int one, int two) {
-		inputLayer[0] = one;
-		inputLayer[1] = two;
+	protected void DoForwardPropagation() {
+    	
+	}
+  
+	protected void DoBackwardPropagation() {
+    	
 	}
 
-	public void DoForwardPropagation() {
-		// Input neuron to hidden layer neurons
-		// I1 to H1
-		for (int h = 0; h < 3; h++) {
-			hiddenLayer[h] = inputLayer[0] * weight[0][h]; // I1
-			hiddenLayer[h] = inputLayer[1] * weight[1][h]; // I2
-		}
-	}
 
-	public void Initialize() {
-		// initial weights to all synapses
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				weight[i][j] = RandomWeight();
-			}
-		}
-		// Input neurons to 0, 0
-		inputLayer[0] = 0;
-		inputLayer[1] = 0;
-		// Output neuron to 0
-		outputLayer = 0;
-	}
-
-	public double RandomWeight() {
+	protected double RandomWeight() {
 		Random rand = new Random();
 		return rand.nextDouble();
-	}
-
-	public static double Sigmoid(double x) {
-		return 1 / (1 - Math.exp(-x));
-	}
-
-	public static double SigmoidP(double x) {
-		return Sigmoid(x) * (1 - Sigmoid(x));
 	}
 }

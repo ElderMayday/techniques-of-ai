@@ -5,33 +5,39 @@ import java.lang.*;
 
 public class NeuralNet {
 
-  	// node[i][j]
-	private double[][] node; // the output value of the j-th node of the i-th layer
-      
-  	// weight[i][j][k] -- weight[layer][neuron-position left][neuron-position right]
-	private double[][][] weight; // the synopsys from j-th node of i-th layer to k-th node of (i+1)-th layer
-
-	private IActivationFunction af;
+	private int inputNum, hiddenNum, outputNum; // number of nodes of the layers
+	private double[][] weightIH, weightHO;      // weights of input-hidden and hidden-output layers
+	private IActivationFunction af;             // activation function
+	private double[] input, hiddenSum, hiddenOutput, outputSum, output; // nodes values
 	
-  	public NeuralNet(int[] layerSize, IActivationFunction af) throws Exception {
-  		
-  		if (layerSize.length < 2)
-  			throw new Exception("Cannot have less than 2 layers");
-  		
+	
+  	public NeuralNet(int inputNum, int hiddenNum, int outputNum, IActivationFunction af) throws Exception {
+  		this.inputNum = inputNum;
+  		this.hiddenNum = hiddenNum;
+  		this.outputNum = outputNum;
   		this.af = af;
   		
-  		node = new double[layerSize.length][];        // allocates memory for layer array
-    	for (int i = 0; i < layerSize.length; i++)  
-        	node[i] = new double[layerSize[i]];
-      
-    	weight = new double[layerSize.length-1][][];
-    	for (int i = 0; i < layerSize.length-1; i++)   // allocates memory for weight array
-          	weight[i] = new double[layerSize[i]][layerSize[i+1]];      
-      	
-      	for (int i = 0; i < weight.length; i++)          // allocate random weight to each synopsys
-          	for (int j = 0; j < weight[i].length; j++)
-              	for (int k = 0; k < weight[i][j].length; k++)
-              		weight[i][j][k] = this.RandomWeight();
+  		input = new double[inputNum+1];
+  		input[0] = 1.0;
+  		
+  		hiddenSum = new double[hiddenNum];
+  		
+  		hiddenOutput = new double[hiddenNum+1];
+  		hiddenOutput[0] = 1.0;
+  		
+  		outputSum = new double[outputNum];
+  		output = new double[outputNum];
+  		
+  		weightIH = new double[inputNum+1][hiddenNum];
+  		for (int i = 0; i <= inputNum; i++)
+  			for (int j = 0; j < hiddenNum; j++)
+  				weightIH[i][j] = this.RandomWeight();
+  		
+  		
+  		weightHO = new double[hiddenNum+1][outputNum];
+  		for (int i = 0; i <= hiddenNum; i++)
+  			for (int j = 0; j < outputNum; j++)
+  				weightHO[i][j] = this.RandomWeight();
     }
   
   
@@ -44,9 +50,7 @@ public class NeuralNet {
   	}
   
 	protected void SetInputNeurons(double[] values) {
-      	for (int i = 0; i < values.length; i++) {
-      		node[0][i] = values[i];
-      	}
+
 	}
 
 	protected void DoForwardPropagation() {

@@ -6,13 +6,15 @@ import java.lang.*;
 public class NeuralNet {
 
   	// node[i][j]
-	private double[][] node; // the output value of the j-th node of the i-th layer
+	protected double[][] node; // the output value of the j-th node of the i-th layer
       
   	// weight[i][j][k] -- weight[layer][neuron-position left][neuron-position right]
-	private double[][][] weight; // the synopsys from j-th node of i-th layer to k-th node of (i+1)-th layer
+	protected double[][][] weight; // the synopsys from j-th node of i-th layer to k-th node of (i+1)-th layer
 
-	private IActivationFunction af;
-	
+	protected IActivationFunction af;
+
+
+
   	public NeuralNet(int[] layerSize, IActivationFunction af) throws Exception {
   		
   		if (layerSize.length < 2)
@@ -33,8 +35,7 @@ public class NeuralNet {
               	for (int k = 0; k < weight[i][j].length; k++)
               		weight[i][j][k] = this.RandomWeight();
     }
-  
-  
+
     public void DoTraining(double[] input, double[] output) {
       	
       	SetInputNeurons(input);     // set input neurons according to input data
@@ -42,6 +43,8 @@ public class NeuralNet {
   		DoForwardPropagation();
       	DoBackwardPropagation();
   	}
+
+
   
 	protected void SetInputNeurons(double[] values) {
       	for (int i = 0; i < values.length; i++) {
@@ -56,7 +59,6 @@ public class NeuralNet {
 	protected void DoBackwardPropagation() {
     	
 	}
-
 
 	protected double RandomWeight() {
 		Random rand = new Random();

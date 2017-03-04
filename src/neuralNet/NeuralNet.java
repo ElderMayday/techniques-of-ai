@@ -33,7 +33,7 @@ public class NeuralNet {
         net = new double[layerNum][];
     	for (int i = 0; i < layerSize.length; i++) {
             out[i] = new double[layerSize[i]];
-            net[i] = out[i] = new double[layerSize[i]];
+            net[i] = new double[layerSize[i]];
         }
       
     	weight = new double[layerNum-1][][];      // allocates memory for weight array
@@ -56,35 +56,46 @@ public class NeuralNet {
         }
     }
 
-    public void DoTraining(double[] input, double[] output) {
-      	setInputNeurons(input);     // set input neurons according to input data
-      
-  		doForwardPropagation();
+    public void DoTraining(double[] input, double[] output) throws Exception {
+  		doForwardPropagation(input);
       	doBackwardPropagation();
   	}
 
-  	public double[] GetOutput(double[] input) {
-  	    setInputNeurons(input);
-  	    doForwardPropagation();
-
-  	    return null; // TO-FINISH
+  	public double[] GetOutput(double[] input) throws Exception {
+  	    doForwardPropagation(input);
+  	    return out[layerNum-1];
     }
 
 
 
 
-	protected void setInputNeurons(double[] values) {
-      	for (int i = 0; i < values.length; i++) {
-      		out[0][i] = values[i];
-      	}
+	protected void setInputNeurons(double[] input) throws Exception {
+        if (input.length != layerSize[0])
+            throw new Exception("Input size mismatch");
+
+  	    System.arraycopy(input, 0, out[0], 0, input.length);
 	}
 
-	protected void doForwardPropagation() {
-    	
+	protected void doForwardPropagation(double[] input) throws Exception {
+        setInputNeurons(input);
+
+    	for (int i = 1; i < layerNum; i++) {
+    	    for (int j = 0; j < layerSize[i]; j++) {
+                double sum = 0.0;
+
+                for (int k = 0; k < layerSize[i-1]; k++)
+                    sum += out[i - 1][k] * weight[i - 1][k][j];
+
+                sum += bias[i-1][j];
+
+                net[i][j] = sum;
+                out[i][j] = af.Function(sum);
+            }
+        }
 	}
   
 	protected void doBackwardPropagation() {
-    	
+
 	}
 
 	protected double randomWeight() {

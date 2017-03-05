@@ -4,14 +4,12 @@ public class Sigmoid implements IActivationFunction {
 
 	protected double sharpness;
 
-
-
 	public Sigmoid(double sharpness) {
 		this.sharpness = sharpness;
 	}
 
 	public double Function(double x) {
-		return 1.0 / (1.0 + Math.exp(- sharpness * x));
+		return 1.0 / (1.0 + Math.exp(- this.sharpness * x));
 	}
 
 	public double Derivative(double x) {

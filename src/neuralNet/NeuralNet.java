@@ -19,7 +19,7 @@ public class NeuralNet {
 
     protected double[][] bias, newBias; // bias[i][j] -- bias from i-th layer to i+1-th layer, j-th node
 
-	protected IActivationFunction af; // arbitary activation function
+	protected IActivationFunction af; // arbitrary activation function
     protected double learningRate;
 
 
@@ -133,8 +133,19 @@ public class NeuralNet {
 
 	}
 
+	// method to debug
+	public void showWeights() {
+  	    for (int i = 0; i < weight.length; i++) {
+  	        for (int j = 0; j < weight[i].length; j++) {
+  	            for (int v = 0; v < weight[i][j].length; v++) {
+  	                System.out.println("Layer " + i + " position " + j + " to layer " + (i+1) + " at position " + v + " weight: " + weight[i][j][v]);
+                }
+            }
+        }
+    }
+
 	protected double randomWeight() {
 		Random rand = new Random();
-		return rand.nextDouble();
+		return rand.nextDouble() * 2 - 1;
 	}
 }

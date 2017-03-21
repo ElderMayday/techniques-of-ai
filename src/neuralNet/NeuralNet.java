@@ -137,9 +137,12 @@ public class NeuralNet {
 	public void showWeights() {
   	    for (int i = 0; i < weight.length; i++) {
   	        for (int j = 0; j < weight[i].length; j++) {
-  	            for (int v = 0; v < weight[i][j].length; v++) {
-  	                System.out.println("Layer " + i + " position " + j + " to layer " + (i+1) + " at position " + v + " weight: " + weight[i][j][v]);
+  	            for (int k = 0; k < weight[i][j].length; k++) {
+  	                System.out.println("Layer " + i + " position " + j + " to layer " + (i+1) + " at position " + k + " weight: " + weight[i][j][k]);
                 }
+            }
+            for (int k = 0; k < bias[i].length; k++) {
+                System.out.println("Bias Layer " + i + " to layer " + (i+1) + " at position " + k + " weight: " + bias[i][k]);
             }
         }
     }

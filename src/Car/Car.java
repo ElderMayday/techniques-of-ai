@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Created by root on 3/21/17.
  */
 public class Car {
-    public static final double speed = 3.0;
+    public static final double speed = 2.0;
     public static final double turningSpeed = 1.5;
     public static final int length = 30;
     public static final int visionRange = 200;

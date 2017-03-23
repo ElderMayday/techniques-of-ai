@@ -1,6 +1,9 @@
 package DNA;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by root on 3/22/17.
  */
@@ -20,6 +23,7 @@ public class DNA {
         for (int i = 0; i < this.dna.length; i++) {
             this.dna[i] = (byte)(Math.floor(Math.random()*256));
         }
+
         return this;
     }
 
@@ -44,7 +48,7 @@ public class DNA {
     public static DNA bitwiseCrossover(DNA dna1, DNA dna2, double probability) {
         byte[] newDNA = new byte[dna1.getDNA().length];
 
-        DNA currDNA;// = dna1;
+        DNA currDNA;
 
         for (int i = 0; i < dna1.getDNA().length; i++) {
             //System.out.println(Byte.toString(currDNA.getDNA()[i]));

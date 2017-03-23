@@ -1,7 +1,10 @@
 package neuralNet;
 
+import java.nio.ByteBuffer;
 import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.lang.*;
 
@@ -151,4 +154,77 @@ public class NeuralNet {
 		Random rand = new Random();
 		return rand.nextDouble() * 2 - 1;
 	}
+
+	// encode weights into a List of byte[]
+	public List<byte[]> getWeightsInByteList() {
+  	    List<byte[]> list = new ArrayList<byte[]>();
+        for (int i = 0; i < weight.length; i++) {
+            for (int j = 0; j < weight[i].length; j++) {
+                for (int k = 0; k < weight[i][j].length; k++) {
+                    // Layer i position j to layer (i+1) at position k weight: weight[i][j][k]);
+                    list.add(toByteArray(weight[i][j][k]));
+                }
+            }
+            for (int k = 0; k < bias[i].length; k++) {
+                //Bias Layer i to layer (i+1) at position k weight: bias[i][k]);
+                list.add(toByteArray(bias[i][k]));
+            }
+        }
+  	    return list;
+    }
+
+    // take list of byte[] and replace the weights in the NN by it
+    public void setWeightsFromByteList(List<byte[]> list){
+  	    int listIndex = 0;
+        for (int i = 0; i < weight.length; i++) {
+            for (int j = 0; j < weight[i].length; j++) {
+                for (int k = 0; k < weight[i][j].length; k++) {
+                    // Layer i position j to layer (i+1) at position k weight: weight[i][j][k]);
+                    weight[i][j][k] = toDouble(list.get(listIndex));
+                    listIndex++;
+                }
+            }
+            for (int k = 0; k < bias[i].length; k++) {
+                //Bias Layer i to layer (i+1) at position k weight: bias[i][k]);
+                bias[i][k] = toDouble(list.get(listIndex));
+                listIndex++;
+            }
+        }
+    }
+
+    // Transforms a List<byte[8]> into a byte[]
+    public static byte[] byteListToByteArray(List<byte[]> list) {
+        byte[] byteArr = new byte[list.size()*8];
+        int dnaCounter = 0;
+        for (byte[] b : list) {
+            for (int i = 0; i < 8; i++) {
+                byteArr[dnaCounter] = b[i];
+                dnaCounter++;
+            }
+        }
+        return byteArr;
+    }
+
+    // Transforms a byte Array into a List<byte[8]>
+    public static List<byte[]> byteArrayToByteList(byte[] byteArray) {
+        List<byte[]> byteList = new ArrayList<byte[]>();
+        for (int i = 0; i < byteArray.length/8 ; i++) {
+            byte[] newByteArr = new byte[8];
+            for (int j = 0; j < 8; j++) {
+                newByteArr[j] = byteArray[i*8 + j];
+            }
+            byteList.add(newByteArr);
+        }
+        return byteList;
+    }
+
+    public static byte[] toByteArray(double value) {
+        byte[] bytes = new byte[8];
+        ByteBuffer.wrap(bytes).putDouble(value);
+        return bytes;
+    }
+
+    public static double toDouble(byte[] bytes) {
+        return ByteBuffer.wrap(bytes).getDouble();
+    }
 }

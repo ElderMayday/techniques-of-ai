@@ -38,7 +38,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     // test car
     //private Car car = new Car(130, 400, 260).addCheckpoints(map.getCheckpoints());
 
-    private Population population = new Population(50,0.35,3);
+    private Population population = new Population(15,0.35,4);
 
     @Override
     public void init() {
@@ -121,6 +121,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 
 
 
+
         population.getMap().drawMap(g);
 
         GeneticCar fittestCar = population.getPopulation().get(0);
@@ -146,21 +147,6 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 
 		for (Line l : createLines) { l.drawLine(g); }
 
-
-		/*
-        map.drawMap(g);
-        car.checkWallIntersection(map.getLines());
-        car.checkCheckpointIntersection(map.getCheckpoints());
-        car.drawCar(g);
-        car.drawVisualField(g);
-        car.drawCheckpoints(g);
-
-        g.setColor(Color.BLACK);
-        g.drawString("X: " + car.getX(), 10, 15);
-        g.drawString("Y:" + car.getY(), 10, 35);
-        g.drawString("degree:" + car.getDegree(), 10, 55);
-        g.drawString("fitness: " + car.getFitness(), 10, 75);
-        */
 
     }
 

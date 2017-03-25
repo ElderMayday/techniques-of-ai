@@ -45,7 +45,7 @@ public class GeneticCar extends Car {
 
             if (output[0] <= 0 + this.acceptanceRate) {
                 super.goLeft();
-            } else if (output[0] == 1 - this.acceptanceRate) {
+            } else if (output[0] >= 1 - this.acceptanceRate) {
                 super.goRight();
             }
 

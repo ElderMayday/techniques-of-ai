@@ -1,5 +1,6 @@
 package DNA;
 
+import Car.Car;
 import Car.GeneticCar;
 import Car.Map;
 import Car.RandomCollection;
@@ -25,8 +26,8 @@ public class Population {
 
     private Map map;
 
-    public static int[] neuralNetworkLayerSize = new int[]{5, 5, 1};
-    public static double neuralNetworkAcceptanceRate = 0.05;
+    public static int[] neuralNetworkLayerSize = new int[]{Car.degrees.size(), 5, 1};
+    public static double neuralNetworkAcceptanceRate = 0.1;
 
     public Population(int populationSize, double mutationRate, int map) {
         this.mutationRate = mutationRate;

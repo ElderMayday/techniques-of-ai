@@ -27,7 +27,7 @@ public class Car {
     private Point posCar;
 
     // List of the degrees of the visual field
-    public static ArrayList<Integer> degrees = new ArrayList<Integer>(Arrays.asList(-90, -45, 0, 45, 90));
+    public static ArrayList<Integer> degrees = new ArrayList<Integer>(Arrays.asList(-90, -45, -20, 0, 20, 45, 90));
     // List of the lines of the visual field
     private ArrayList<Line> FOVLines;
 
@@ -42,6 +42,7 @@ public class Car {
         this.crashed = false;
         this.distanceTraveled = 0;
         this.FOVLines = new ArrayList<Line>();
+
     }
 
     // Optional constructor parameter for checkpoints
@@ -84,6 +85,7 @@ public class Car {
         }
 
     }
+
 
     public void goRight() {
         if (!this.crashed) {

@@ -1,6 +1,9 @@
 package DNA;
 
 
+import Car.GeneticCar;
+import neuralNet.NeuralNet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,10 @@ public class DNA {
 
     public DNA(byte[] dna) {
         this.dna = dna;
+    }
+
+    public DNA(GeneticCar geneticCar) {
+        this.dna = NeuralNet.byteListToByteArray(geneticCar.getNeuralNet().getWeightsInByteList());
     }
 
     public DNA randomise() {

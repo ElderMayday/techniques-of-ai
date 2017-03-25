@@ -29,7 +29,8 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     private Image image;
     private Graphics second;
 
-    private boolean pause = false;
+    private boolean paint = false;          // hotkey 'P' - paint visuals or not
+    private boolean playInRealtime = true;  // hotkey 'R' - display the learning in real time or dont care for visuals
 
     // test map
     //private Map map = new Map(2);
@@ -37,7 +38,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     // test car
     //private Car car = new Car(130, 400, 260).addCheckpoints(map.getCheckpoints());
 
-    private Population population = new Population(15,0.01,2);
+    private Population population = new Population(20,0.02,2);
 
     @Override
     public void init() {
@@ -74,30 +75,26 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     public void run() {
 
         while (true) {
-            /*
-            if (!pause) {
-                if (left) {
-                    car.goLeft();
-                } else if (right) {
-                    car.goRight();
-                }
-                car.update(map);
-            }*/
-            //population.
+
+
             this.population.doMoves();
 
-            repaint();
-
-            timeSinceLastUpdate = System.currentTimeMillis() - lastUpdate;
-            if (timeSinceLastUpdate < millisPerFrame) {
-                long timeToSlepp = millisPerFrame - timeSinceLastUpdate;
-                try {
-                    Thread.sleep(timeToSlepp);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            if (this.paint) {
+                repaint();
             }
-            lastUpdate = System.currentTimeMillis();
+
+            if (this.playInRealtime) {
+                timeSinceLastUpdate = System.currentTimeMillis() - lastUpdate;
+                if (timeSinceLastUpdate < millisPerFrame) {
+                    long timeToSlepp = millisPerFrame - timeSinceLastUpdate;
+                    try {
+                        Thread.sleep(timeToSlepp);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                lastUpdate = System.currentTimeMillis();
+            }
         }
     }
 
@@ -141,6 +138,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
         g.drawString("Generation : " + population.getGeneration(), 10, 580);
         g.drawString("Population Size : " + population.getPopulation().size(), 10, 560);
         g.drawString("Best fitness : " + (int)fittestCar.getFitness(), 10, 540);
+        g.drawString("Iteration : " + population.getIteration(), 10, 520);
 
 
 		/*
@@ -169,30 +167,17 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     @Override
     public void keyPressed(KeyEvent arg0) {
         switch (arg0.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                // car.accelerate();
-                break;
-
-            case KeyEvent.VK_RIGHT:
-                right = true;
-                // car.goRight();
-                break;
-
-            case KeyEvent.VK_DOWN:
-                // car.breaking();
-                break;
-
-            case KeyEvent.VK_LEFT:
-                // car.goLeft();
-                left = true;
-                break;
 
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
                 break;
 
             case KeyEvent.VK_P:
-                pause = !pause;
+                this.paint = !this.paint;
+                break;
+
+            case KeyEvent.VK_R:
+                this.playInRealtime = !playInRealtime;
                 break;
         }
 

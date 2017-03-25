@@ -1,5 +1,7 @@
 package Car;
 
+import DNA.Population;
+
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Frame;
@@ -30,10 +32,12 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     private boolean pause = false;
 
     // test map
-    private Map map = new Map(2);
+    //private Map map = new Map(2);
 
     // test car
-    private Car car = new Car(130, 400, 260).addCheckpoints(map.getCheckpoints());
+    //private Car car = new Car(130, 400, 260).addCheckpoints(map.getCheckpoints());
+
+    private Population population = new Population(15,0.01,2);
 
     @Override
     public void init() {
@@ -44,7 +48,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
         addKeyListener(this);
         addMouseListener(this);
         Frame frame = (Frame) this.getParent().getParent();
-        frame.setTitle("Cars");
+        frame.setTitle("Genetic Cars");
 
     }
 
@@ -70,6 +74,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     public void run() {
 
         while (true) {
+            /*
             if (!pause) {
                 if (left) {
                     car.goLeft();
@@ -77,7 +82,9 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
                     car.goRight();
                 }
                 car.update(map);
-            }
+            }*/
+            //population.
+            this.population.doMoves();
 
             repaint();
 
@@ -115,12 +122,34 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
 
+        population.getMap().drawMap(g);
+
+        GeneticCar fittestCar = population.getPopulation().get(0);
+        for (GeneticCar geneticCar : population.getPopulation()) {
+            if (geneticCar.getFitness() > fittestCar.getFitness()) {
+                fittestCar = geneticCar;
+            }
+            geneticCar.drawCar(g);
+        }
+
+        // Draw FOV and checkpoints of fittest car
+        fittestCar.drawVisualField(g);
+        fittestCar.drawCheckpoints(g);
+
+
+        g.setColor(Color.BLACK);
+        g.drawString("Generation : " + population.getGeneration(), 10, 580);
+        g.drawString("Population Size : " + population.getPopulation().size(), 10, 560);
+        g.drawString("Best fitness : " + (int)fittestCar.getFitness(), 10, 540);
+
+
 		/*
 		 * for (Line l : createLines) { l.drawLine(g); }
 		 */
 
+		/*
         map.drawMap(g);
-        car.checkWallIntersection(map.getLines(), g);
+        car.checkWallIntersection(map.getLines());
         car.checkCheckpointIntersection(map.getCheckpoints());
         car.drawCar(g);
         car.drawVisualField(g);
@@ -131,6 +160,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
         g.drawString("Y:" + car.getY(), 10, 35);
         g.drawString("degree:" + car.getDegree(), 10, 55);
         g.drawString("fitness: " + car.getFitness(), 10, 75);
+        */
 
     }
 

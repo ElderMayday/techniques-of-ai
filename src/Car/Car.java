@@ -11,7 +11,6 @@ import java.util.Arrays;
 public class Car {
     public static final double speed = 2.0;
     public static final double turningSpeed = 1.5;
-    public static final int length = 30;
     public static final int visionRange = 200;
 
     public static int carLength = 20;
@@ -20,7 +19,6 @@ public class Car {
     private double x;
     private double y;
     private double degree;
-    private double currSpeed;
 
     // vars useful for the NN and GA
     private boolean crashed;
@@ -41,17 +39,16 @@ public class Car {
         this.x = x;
         this.y = y;
         this.degree = degree;
-        this.currSpeed = 0;
         this.crashed = false;
         this.distanceTraveled = 0;
         this.FOVLines = new ArrayList<Line>();
     }
 
     // Optional constructor parameter for checkpoints
-    public Car addCheckpoints(ArrayList<Line> checkpoints) {
+    public void addCheckpoints(ArrayList<Line> checkpoints) {
         this.checkpoints = new ArrayList<Line>(checkpoints);
         this.crossedCheckpoints = 0;
-        return this;
+        //return this;
     }
 
     // update position of the car - dependence on degree and speed
@@ -103,20 +100,6 @@ public class Car {
         }
     }
 
-    public void accelerate() {
-        this.currSpeed += 0.1;
-        if (this.currSpeed >= Car.speed) {
-            this.currSpeed = Car.speed;
-        }
-    }
-
-    public void breaking() {
-        this.currSpeed -= 0.2;
-        if (this.currSpeed <= 0) {
-            this.currSpeed = 0;
-        }
-    }
-
     // Calculating the 4 corners of a car
     private ArrayList<Point> getCarCorners() {
         ArrayList<Point> points = new ArrayList<Point>();
@@ -150,7 +133,7 @@ public class Car {
     }
 
     // Check for visual line intersection with wall lines
-    public void checkWallIntersection(ArrayList<Line> wall, Graphics g) {
+    public void checkWallIntersection(ArrayList<Line> wall) {
         for (int i = 0; i < this.FOVLines.size(); i++) {
             Line visualLine = this.FOVLines.get(i);
 
@@ -187,11 +170,11 @@ public class Car {
     }
 
     // distance to wall data for NN input
-    public ArrayList<Integer> getFOVdata() {
-        ArrayList<Integer> distances = new ArrayList<Integer>();
+    public ArrayList<Double> getFOVdata() {
+        ArrayList<Double> distances = new ArrayList<Double>();
 
         for (Line line : this.FOVLines) {
-            distances.add((int) line.lineLength());
+            distances.add(line.lineLength());
         }
 
         return distances;
@@ -255,4 +238,16 @@ public class Car {
     public double getDistanceTraveled() {
         return this.distanceTraveled;
     }
+
+    public boolean isCrashed() {
+        return this.crashed;
+    }
+
+    public void resetCar(double x, double y, double degree) {
+        this.x = x;
+        this.y = y;
+        this.degree = degree;
+        this.crashed = false;
+    }
+
 }

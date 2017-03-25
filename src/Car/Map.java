@@ -11,6 +11,10 @@ public class Map {
     private ArrayList<Line> lines;
     private ArrayList<Line> checkpoints;
 
+    private double startX;
+    private double startY;
+    private double startDegree;
+
     public Map(int testMapNr) {
         this.lines = new ArrayList<Line>();
         this.checkpoints = new ArrayList<Line>();
@@ -18,6 +22,10 @@ public class Map {
 		 * ugly line values for the maps
 		 */
         if (testMapNr == 1) {
+
+            this.startX = 400;
+            this.startY = 400;
+            this.startDegree = 0;
 
             int x1 = 50;
             int y1 = 50;
@@ -46,6 +54,10 @@ public class Map {
             this.addLine(new Line(new Point(x7, y7), new Point(x8, y8)));
             this.addLine(new Line(new Point(x8, y8), new Point(x5, y5)));
         } else if(testMapNr == 2) {
+
+            this.startX = 130;
+            this.startY = 400;
+            this.startDegree = 260;
 
             this.addLine(new Line(new Point(49,279), new Point(38,154)));
             this.addLine(new Line(new Point(38,154), new Point(41,97)));
@@ -144,7 +156,7 @@ public class Map {
             this.checkpoints.add(new Line(new Point(365,437), new Point(386,541)));
             this.checkpoints.add(new Line(new Point(302,429), new Point(234,511)));
             this.checkpoints.add(new Line(new Point(209,392), new Point(144,454)));
-            this.checkpoints.add(new Line(new Point(167,348), new Point(74,385)));
+            //this.checkpoints.add(new Line(new Point(167,348), new Point(74,385)));
             this.checkpoints.add(new Line(new Point(145,278), new Point(58,291)));
             this.checkpoints.add(new Line(new Point(133,216), new Point(50,221)));
             this.checkpoints.add(new Line(new Point(129,149), new Point(45,141)));
@@ -173,5 +185,17 @@ public class Map {
 
     public ArrayList<Line> getCheckpoints() {
         return this.checkpoints;
+    }
+
+    public double getStartX() {
+        return this.startX;
+    }
+
+    public double getStartY() {
+        return this.startY;
+    }
+
+    public double getStartDegree() {
+        return this.startDegree;
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		NeuralNet nn = new NeuralNet(new int[]{2, 2,2, 1}, new Sigmoid(1.0), 0.5);
+		NeuralNet nn = new NeuralNet(new int[]{2, 2, 1}, new Sigmoid(1.0), 0.5);
 
 		for (int i = 0; i < 50000; i++) {
             nn.DoTraining(new double[]{1.0, 1.0}, new double[]{0.0});
@@ -35,7 +35,7 @@ public class Main {
         System.out.println(r1[0] + " " + r2[0] + " " + r3[0] + " " + r4[0]);
 
 
-        // List<byte[]> to byte[) transformation
+        // List<byte[]> to byte[) transformation -> used in the DNA class
         byte[] nn2dna = NeuralNet.byteListToByteArray(nn2.getWeightsInByteList());
         List<byte[]> nn2dnaList = NeuralNet.byteArrayToByteList(nn2dna);
 

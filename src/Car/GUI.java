@@ -29,8 +29,8 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     private Image image;
     private Graphics second;
 
-    private boolean paint = false;          // hotkey 'P' - paint visuals or not
-    private boolean playInRealtime = true;  // hotkey 'R' - display the learning in real time or dont care for visuals
+    private boolean paint = true;          // hotkey 'P' - paint visuals or not
+    private boolean playInRealTime = true;  // hotkey 'R' - display the learning in real time or dont care for visuals
 
     // test map
     //private Map map = new Map(2);
@@ -38,7 +38,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     // test car
     //private Car car = new Car(130, 400, 260).addCheckpoints(map.getCheckpoints());
 
-    private Population population = new Population(20,0.02,2);
+    private Population population = new Population(50,0.35,3);
 
     @Override
     public void init() {
@@ -83,7 +83,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
                 repaint();
             }
 
-            if (this.playInRealtime) {
+            if (this.playInRealTime) {
                 timeSinceLastUpdate = System.currentTimeMillis() - lastUpdate;
                 if (timeSinceLastUpdate < millisPerFrame) {
                     long timeToSlepp = millisPerFrame - timeSinceLastUpdate;
@@ -119,6 +119,8 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
 
+
+
         population.getMap().drawMap(g);
 
         GeneticCar fittestCar = population.getPopulation().get(0);
@@ -141,9 +143,9 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
         g.drawString("Iteration : " + population.getIteration(), 10, 520);
 
 
-		/*
-		 * for (Line l : createLines) { l.drawLine(g); }
-		 */
+
+		for (Line l : createLines) { l.drawLine(g); }
+
 
 		/*
         map.drawMap(g);
@@ -177,7 +179,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
                 break;
 
             case KeyEvent.VK_R:
-                this.playInRealtime = !playInRealtime;
+                this.playInRealTime = !playInRealTime;
                 break;
         }
 
@@ -185,16 +187,6 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 
     @Override
     public void keyReleased(KeyEvent arg0) {
-        switch (arg0.getKeyCode()) {
-            case KeyEvent.VK_RIGHT:
-                right = false;
-                break;
-
-            case KeyEvent.VK_LEFT:
-                left = false;
-                break;
-        }
-
     }
 
     @Override
@@ -203,28 +195,32 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 
     }
 
-	/*
-	 * int lastX; int lastY; boolean initialized = false; ArrayList<Line>
-	 * createLines = new ArrayList<Line>();
-	 */
+
+    int lastX; int lastY; boolean initialized = false;
+    ArrayList<Line> createLines = new ArrayList<Line>();
+
 
     @Override
     public void mouseClicked(MouseEvent arg0) {
+        if (initialized == false) {
+            initialized = true;
+            lastX = arg0.getX();
+		    lastY = arg0.getY();
+        } else {
+            int x = arg0.getX();
+            int y = arg0.getY();
 
-		/*
-		 * if (initialized == false) { initialized = true; lastX = arg0.getX();
-		 * lastY = arg0.getY(); } else { int x = arg0.getX(); int y =
-		 * arg0.getY();
-		 *
-		 * Line l = new Line(new Point(lastX, lastY), new Point(x,y));
-		 * createLines.add(l);
-		 *
-		 * String o =
-		 * "this.addLine(new Line(new Point("+lastX+","+lastY+"), new Point("+x+
-		 * ","+y+")));"; System.out.println(o);
-		 *
-		 * lastX = x; lastY = y; initialized = false; }
-		 */
+		    Line l = new Line(new Point(lastX, lastY), new Point(x,y));
+		    createLines.add(l);
+
+		    String o = "this.addLine(new Line(new Point("+lastX+","+lastY+"), new Point("+x+ ","+y+")));";
+		    System.out.println(o);
+		    lastX = x;
+		    lastY = y;
+
+		    //uncomment line for checkpoints
+		    initialized = false;
+        }
     }
 
     @Override

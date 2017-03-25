@@ -25,8 +25,8 @@ public class Population {
 
     private Map map;
 
-    public static int[] neuralNetworkLayerSize = new int[]{5, 5, 2};
-    public static double neuralNetworkAcceptanceRate = 0.9;
+    public static int[] neuralNetworkLayerSize = new int[]{5, 5, 1};
+    public static double neuralNetworkAcceptanceRate = 0.05;
 
     public Population(int populationSize, double mutationRate, int map) {
         this.mutationRate = mutationRate;
@@ -34,7 +34,7 @@ public class Population {
         this.generation = 1;
         this.iteration = 0;
 
-        this.map = new Map(2);
+        this.map = new Map(map);
 
         // Initialize the random population
         for (int i = 0; i < populationSize; i++) {

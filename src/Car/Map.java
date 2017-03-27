@@ -569,6 +569,38 @@ public class Map {
             this.checkpoints.add(new Line(new Point(573,24), new Point(571,78)));
             this.checkpoints.add(new Line(new Point(379,33), new Point(372,80)));
             this.checkpoints.add(new Line(new Point(153,21), new Point(186,101)));
+        } else if (testMapNr == 5) {
+
+            this.startX = 250;
+            this.startY = 550;
+            this.startDegree = 180;
+
+            // circle
+            // 3,2,4
+            // 1,0,1
+            // 5,2,6
+
+            int[][] map =
+                    {{3,2, 4, 0, 3, 2, 4, 0},
+                    {1, 0, 5, 2, 6, 0, 1, 0},
+                    {5, 4, 3, 2, 4, 0, 1, 0},
+                    {3, 6, 5, 4, 1, 0, 5, 4},
+                    {1, 0, 0, 1, 5, 2, 4, 1},
+                    {5, 2, 2, 6, 0, 0, 5, 6}};
+
+            lines.addAll(MapBuildingBlock.formMapFromBlockData(map));
+        } else if (testMapNr == 6) {
+            this.startX = 350;
+            this.startY = 150;
+            this.startDegree = 0;
+
+            int[][] map = {{0, 0, 0, 0, 0, 0, 0, 0},
+                    {3, 2, 2, 2, 2, 2, 4, 0},
+                    {1, 0, 3, 2, 4, 0, 1, 0},
+                    {1, 0, 1, 0, 1, 0, 1, 0},
+                    {5, 2, 6, 0, 5, 2, 6, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0}};
+            lines.addAll(MapBuildingBlock.formMapFromBlockData(map));
         }
     }
 

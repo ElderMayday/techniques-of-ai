@@ -8,6 +8,7 @@ import neuralNet.NeuralNet;
 import neuralNet.Sigmoid;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -26,8 +27,11 @@ public class Population {
 
     private Map map;
 
-    public static int[] neuralNetworkLayerSize = new int[]{Car.degrees.size(), 5, 1};
+    public static int[] neuralNetworkLayerSize = new int[]{Car.degrees.size(), 3, 1};
     public static double neuralNetworkAcceptanceRate = 0.1;
+
+    // Pointer for the fittest car that the GA produced
+    private GeneticCar fittestGeneticCar;
 
     public Population(int populationSize, double mutationRate, int map) {
         this.mutationRate = mutationRate;
@@ -46,6 +50,8 @@ public class Population {
             this.population.add(geneticCar);
         }
 
+        this.fittestGeneticCar = this.population.get(0);
+
     }
 
     public void doMoves() {
@@ -58,8 +64,28 @@ public class Population {
                 geneticCar.checkCheckpointIntersection(this.map.getCheckpoints());
                 geneticCar.makeNNdecision();
                 carsAreSimulating = true;
+
+                // is this car fitter than the fittest car?
+                if (geneticCar.getFitness() > this.fittestGeneticCar.getFitness()) {
+                    this.fittestGeneticCar = geneticCar;
+                }
             }
         }
+
+
+        /*
+        int addNcars = 0;
+        for (Iterator<GeneticCar> iterator = this.population.iterator(); iterator.hasNext(); ){
+            GeneticCar geneticCar = iterator.next();
+            if (geneticCar.isCrashed()) {
+                iterator.remove();
+                addNcars++;
+            }
+        }
+
+        for (int i = 0; i < addNcars; i++) {
+            this.population.add(getNewGeneticCar());
+        }*/
 
         // No car is moving anymore -> new population
         // Simulation ran too long -> new population
@@ -124,6 +150,57 @@ public class Population {
         this.population = newPopulation;
         this.generation++;
 
+    }
+
+    private GeneticCar getNewGeneticCar() {
+
+        // Make collection of GeneticCars and their fitness, which will be their probability of being chosen for
+        // next population
+        RandomCollection<GeneticCar> randomCarCollection = new RandomCollection<GeneticCar>();
+        boolean fittestWasAdded = false;
+        for (GeneticCar geneticCar : this.population) {
+            randomCarCollection.add(geneticCar.getFitness(), geneticCar);
+            if (geneticCar.equals(this.fittestGeneticCar)) {
+                fittestWasAdded = true;
+            }
+        }
+
+        if (!fittestWasAdded) {
+            randomCarCollection.add(this.fittestGeneticCar.getFitness(), this.fittestGeneticCar);
+        }
+
+        // chose 2 parents at random with their fitness as probability
+        DNA parent1 = new DNA(randomCarCollection.next());
+        DNA parent2 = new DNA(randomCarCollection.next());
+
+        // apply bitwise crossover and mutation
+        DNA child = DNA.bitwiseCrossover(parent1, parent2, 0.5);
+        child.applyMutation(this.mutationRate);
+
+        // DNA class to List<byte[]>
+        List<byte[]> childByteList = NeuralNet.byteArrayToByteList(child.getDNA());
+
+        // Create the NeuralNetwork with the resulting DNA
+        NeuralNet childNeuralNetwork;
+        try {
+            childNeuralNetwork = new NeuralNet(neuralNetworkLayerSize, new Sigmoid(1.0), 0.5);
+            childNeuralNetwork.setWeightsFromByteList(childByteList);
+
+            // Create the GeneticCar object
+            GeneticCar geneticCarChild = new GeneticCar(this.map.getStartX(), this.map.getStartY(), this.map.getStartDegree(),
+                    neuralNetworkLayerSize, neuralNetworkAcceptanceRate);
+            geneticCarChild.addCheckpoints(this.map.getCheckpoints());
+
+            // Give it the new DNA for the Neural Network
+            geneticCarChild.setNeuralNet(childNeuralNetwork);
+
+            // add child to new population
+            return geneticCarChild;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // Returns the GeneticCar with the highest fitness

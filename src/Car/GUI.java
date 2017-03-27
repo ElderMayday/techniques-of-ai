@@ -32,13 +32,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     private boolean paint = true;          // hotkey 'P' - paint visuals or not
     private boolean playInRealTime = true;  // hotkey 'R' - display the learning in real time or dont care for visuals
 
-    // test map
-    //private Map map = new Map(2);
-
-    // test car
-    //private Car car = new Car(130, 400, 260).addCheckpoints(map.getCheckpoints());
-
-    private Population population = new Population(15,0.35,4);
+    private Population population = new Population(15,0.05,6);
 
     @Override
     public void init() {
@@ -120,8 +114,6 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
         g.setColor(Color.BLACK);
 
 
-
-
         population.getMap().drawMap(g);
 
         GeneticCar fittestCar = population.getPopulation().get(0);
@@ -144,9 +136,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
         g.drawString("Iteration : " + population.getIteration(), 10, 520);
 
 
-
 		for (Line l : createLines) { l.drawLine(g); }
-
 
     }
 

@@ -58,7 +58,6 @@ public class DNA {
         DNA currDNA;
 
         for (int i = 0; i < dna1.getDNA().length; i++) {
-            //System.out.println(Byte.toString(currDNA.getDNA()[i]));
 
             for (int bit = 0; bit < 8; bit++) {
 

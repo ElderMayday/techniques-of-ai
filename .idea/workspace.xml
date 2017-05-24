@@ -5,13 +5,16 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/Car.class" afterPath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/Car.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/GUI.class" afterPath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/GUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/GeneticCar.class" afterPath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/GeneticCar.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/Map.class" afterPath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/Map.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/MapBuildingBlock.class" afterPath="$PROJECT_DIR$/out/production/techniques-of-ai/Car/MapBuildingBlock.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/techniques-of-ai/DNA/DNA.class" afterPath="$PROJECT_DIR$/out/production/techniques-of-ai/DNA/DNA.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/techniques-of-ai/DNA/Population.class" afterPath="$PROJECT_DIR$/out/production/techniques-of-ai/DNA/Population.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Car/Car.java" afterPath="$PROJECT_DIR$/src/Car/Car.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Car/GUI.java" afterPath="$PROJECT_DIR$/src/Car/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Car/GeneticCar.java" afterPath="$PROJECT_DIR$/src/Car/GeneticCar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Car/Map.java" afterPath="$PROJECT_DIR$/src/Car/Map.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Car/MapBuildingBlock.java" afterPath="$PROJECT_DIR$/src/Car/MapBuildingBlock.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Car/RandomCollection.java" afterPath="$PROJECT_DIR$/src/Car/RandomCollection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DNA/DNA.java" afterPath="$PROJECT_DIR$/src/DNA/DNA.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DNA/Population.java" afterPath="$PROJECT_DIR$/src/DNA/Population.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,40 +34,8 @@
       <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Car/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1595">
-              <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DNA.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DNA/DNA.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="900">
-              <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Map.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Car/Map.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="588" column="46" lean-forward="false" selection-start-line="588" selection-start-column="46" selection-end-line="588" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MapBuildingBlock.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Car/MapBuildingBlock.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="-825">
+              <caret line="26" column="41" lean-forward="true" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,22 +46,12 @@
       <file leaf-file-name="Population.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DNA/Population.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="139" column="0" lean-forward="true" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+            <state relative-caret-position="273">
+              <caret line="141" column="0" lean-forward="true" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4259#4271#0" expanded="true" />
+                <element signature="method#getNewGeneticCar#0;class#Population#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RandomCollection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Car/RandomCollection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -98,18 +59,8 @@
       <file leaf-file-name="GeneticCar.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Car/GeneticCar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NeuralNet.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/neuralNet/NeuralNet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2550">
-              <caret line="176" column="38" lean-forward="false" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="38" />
+            <state relative-caret-position="492">
+              <caret line="48" column="55" lean-forward="true" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -118,9 +69,11 @@
       <file leaf-file-name="Car.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Car/Car.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1429">
-              <caret line="122" column="25" lean-forward="false" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="-2079">
+              <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+              <folding>
+                <element signature="method#resetCar#0;class#Car#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -128,8 +81,8 @@
       <file leaf-file-name="simulations" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/simulations">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="59" lean-forward="true" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+            <state relative-caret-position="120">
+              <caret line="8" column="61" lean-forward="true" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -162,14 +115,14 @@
         <option value="$PROJECT_DIR$/src/DNA/testDNA.java" />
         <option value="$PROJECT_DIR$/src/neuralNet/NeuralNet.java" />
         <option value="$PROJECT_DIR$/src/neuralNet/Main.java" />
-        <option value="$PROJECT_DIR$/src/DNA/DNA.java" />
         <option value="$PROJECT_DIR$/src/simulations" />
+        <option value="$PROJECT_DIR$/src/Car/RandomCollection.java" />
+        <option value="$PROJECT_DIR$/src/Car/MapBuildingBlock.java" />
         <option value="$PROJECT_DIR$/src/Car/Map.java" />
-        <option value="$PROJECT_DIR$/src/Car/GeneticCar.java" />
+        <option value="$PROJECT_DIR$/src/DNA/DNA.java" />
         <option value="$PROJECT_DIR$/src/Car/Car.java" />
         <option value="$PROJECT_DIR$/src/Car/GUI.java" />
-        <option value="$PROJECT_DIR$/src/Car/MapBuildingBlock.java" />
-        <option value="$PROJECT_DIR$/src/Car/RandomCollection.java" />
+        <option value="$PROJECT_DIR$/src/Car/GeneticCar.java" />
         <option value="$PROJECT_DIR$/src/DNA/Population.java" />
       </list>
     </option>
@@ -181,8 +134,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1055" />
+    <option name="x" value="-1" />
+    <option name="width" value="1922" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -834,16 +788,16 @@
       <workItem from="1490515190257" duration="4022000" />
       <workItem from="1490622728914" duration="11559000" />
       <workItem from="1495461558353" duration="2523000" />
-      <workItem from="1495612369369" duration="3091000" />
+      <workItem from="1495612369369" duration="19752000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82556000" />
+    <option name="totallyTimeSpent" value="99217000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1055" extended-state="2" />
-    <editor active="true" />
+    <frame x="-1" y="0" width="1922" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -855,12 +809,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27502635" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27473685" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2897787" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973932" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -944,14 +898,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Car/Car.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="29" lean-forward="true" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Car/GeneticCar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1088,7 +1034,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2055">
           <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="method#resetCar#0;class#Car#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1138,7 +1086,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2055">
           <caret line="140" column="0" lean-forward="true" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="method#resetCar#0;class#Car#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1261,70 +1211,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/simulations">
+    <entry file="jar:///usr/lib/jvm/jdk1.8.0_121/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="59" lean-forward="true" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Car/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1595">
-          <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DNA/DNA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Car/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="588" column="46" lean-forward="false" selection-start-line="588" selection-start-column="46" selection-end-line="588" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Car/MapBuildingBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Car/GeneticCar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/neuralNet/NeuralNet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2550">
-          <caret line="176" column="38" lean-forward="false" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Car/Car.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1429">
-          <caret line="122" column="25" lean-forward="false" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="25" />
+        <state relative-caret-position="219">
+          <caret line="850" column="0" lean-forward="false" selection-start-line="850" selection-start-column="0" selection-end-line="850" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1337,13 +1227,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DNA/Population.java">
+    <entry file="file://$PROJECT_DIR$/src/Car/MapBuildingBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="139" column="0" lean-forward="true" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+        <state relative-caret-position="470">
+          <caret line="153" column="68" lean-forward="false" selection-start-line="153" selection-start-column="68" selection-end-line="153" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4259#4271#0" expanded="true" />
+            <element signature="e#4517#4523#0" expanded="true" />
+            <element signature="e#4733#4739#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Car/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="598" column="31" lean-forward="false" selection-start-line="598" selection-start-column="31" selection-end-line="598" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/neuralNet/NeuralNet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1397">
+          <caret line="176" column="38" lean-forward="false" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/simulations">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="61" lean-forward="true" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DNA/DNA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="65" column="24" lean-forward="true" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Car/GeneticCar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="48" column="55" lean-forward="true" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Car/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-825">
+          <caret line="26" column="41" lean-forward="true" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Car/Car.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2079">
+          <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+          <folding>
+            <element signature="method#resetCar#0;class#Car#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DNA/Population.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="141" column="0" lean-forward="true" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getNewGeneticCar#0;class#Population#0" expanded="false" />
           </folding>
         </state>
       </provider>

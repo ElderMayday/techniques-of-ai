@@ -32,7 +32,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     private boolean paint = true;          // hotkey 'P' - paint visuals or not
     private boolean playInRealTime = true;  // hotkey 'R' - display the learning in real time or dont care for visuals
 
-    private Population population = new Population(15,0.35,6);
+    private Population population = new Population(20,0.05,3);
 
     @Override
     public void init() {
@@ -79,9 +79,9 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
             if (this.playInRealTime) {
                 timeSinceLastUpdate = System.currentTimeMillis() - lastUpdate;
                 if (timeSinceLastUpdate < millisPerFrame) {
-                    long timeToSlepp = millisPerFrame - timeSinceLastUpdate;
+                    long timeToSleep = millisPerFrame - timeSinceLastUpdate;
                     try {
-                        Thread.sleep(timeToSlepp);
+                        Thread.sleep(timeToSleep);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -111,7 +111,6 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
-
 
         population.getMap().drawMap(g);
 
@@ -143,6 +142,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 
     @Override
     public void keyPressed(KeyEvent arg0) {
+
         switch (arg0.getKeyCode()) {
 
             case KeyEvent.VK_ESCAPE:
@@ -155,6 +155,31 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 
             case KeyEvent.VK_R:
                 this.playInRealTime = !playInRealTime;
+                break;
+
+            // map change
+            case KeyEvent.VK_NUMPAD1:
+                this.population.setMap(1);
+                break;
+
+            case KeyEvent.VK_NUMPAD2:
+                this.population.setMap(2);
+                break;
+
+            case KeyEvent.VK_NUMPAD3:
+                this.population.setMap(3);
+                break;
+
+            case KeyEvent.VK_NUMPAD4:
+                this.population.setMap(4);
+                break;
+
+            case KeyEvent.VK_NUMPAD5:
+                this.population.setMap(5);
+                break;
+
+            case KeyEvent.VK_NUMPAD6:
+                this.population.setMap(6);
                 break;
         }
 
@@ -175,8 +200,10 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     ArrayList<Line> createLines = new ArrayList<Line>();
 
 
+
     @Override
     public void mouseClicked(MouseEvent arg0) {
+        /*
         if (initialized == false) {
             initialized = true;
             lastX = arg0.getX();
@@ -196,6 +223,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 		    //uncomment line for checkpoints
 		    initialized = false;
         }
+        */
     }
 
     @Override

@@ -20,7 +20,7 @@ public class Car {
     public static int carLength = 20;
     public static int carWidth = 10;
 
-    public static Color checkpointColor = new Color(Integer.parseInt( "3D545D", 16 ));
+    public static Color checkpointColor = new Color(Integer.parseInt( "00FF0000", 16 ));
     public static Color FOVLineColor = new Color(Integer.parseInt("C3C9AC", 16));
 
     private double x;
@@ -227,19 +227,30 @@ public class Car {
 
     // Draws visual line and oval to signal intersection
     public void drawVisualField(Graphics g) {
-        g.setColor(Car.FOVLineColor);
-        for (Line l : this.FOVLines) {
-            l.drawLine(g);
-            if (l.lineLength() < Car.visionRange - 2) {
-                g.drawOval((int) l.getP2().X() - 5, (int) l.getP2().Y() - 5, 10, 10);
+
+        try {
+            g.setColor(Car.FOVLineColor);
+
+            for (Line l : this.FOVLines) {
+                l.drawLine(g);
+                if (l.lineLength() < Car.visionRange - 2) {
+                    g.drawOval((int) l.getP2().X() - 5, (int) l.getP2().Y() - 5, 10, 10);
+                }
             }
+        } catch (Exception e) {
+            //System.out.println(e);
         }
+
     }
 
     public void drawCheckpoints(Graphics g) {
-        g.setColor(Car.checkpointColor);
-        for (Line l : this.checkpoints) {
-            l.drawLine(g);
+        try {
+            g.setColor(Car.checkpointColor);
+            for (Line l : this.checkpoints) {
+                l.drawLine(g);
+            }
+        } catch (Exception e){
+            //e.printStackTrace();
         }
     }
 

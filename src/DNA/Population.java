@@ -27,8 +27,12 @@ public class Population {
 
     private Map map;
 
-    public static int[] neuralNetworkLayerSize = new int[]{Car.degrees.size(), 5, 2};//5};//5};
+    public static int[] neuralNetworkLayerSize = new int[]{Car.degrees.size(),5, 2};//5, 2};;
     public static double neuralNetworkAcceptanceRate = 0.1;
+
+    // defines how many iterations it takes so that a car in the list starts
+    // set at 5: car1 starts at iteration 0, car 2 at 5, car 3 at 10, etc.
+    public static int deferredStart = 5;
 
     // Pointer for the fittest car that the GA produced
     private GeneticCar fittestGeneticCar;
@@ -54,24 +58,32 @@ public class Population {
 
     }
 
+    // Do the movement for the whole car population
     public void doMoves() {
         this.iteration++;
         boolean carsAreSimulating = false;
+
+        // variable needed for the deferred start
+        int startCounter = 0;
+
         for (GeneticCar geneticCar : this.population) {
-            if (!geneticCar.isCrashed()) {
-                geneticCar.update(this.map);
-                geneticCar.checkWallIntersection(this.map.getLines());
-                geneticCar.checkCheckpointIntersection(this.map.getCheckpoints());
-                geneticCar.makeNNdecision();
+            startCounter += deferredStart + 1;
+            if (this.iteration+deferredStart >= startCounter) {
+                if (!geneticCar.isCrashed()) {
+                    geneticCar.update(this.map);
+                    geneticCar.checkWallIntersection(this.map.getLines());
+                    geneticCar.checkCheckpointIntersection(this.map.getCheckpoints());
+                    geneticCar.makeNNdecision();
 
-                // uncomment this when wanting speed factors per car
-                //if (geneticCar.getCurrSpeed() > 0) {
+                    // uncomment this when wanting speed factors per car
+                    //if (geneticCar.getCurrSpeed() > 0) {
                     carsAreSimulating = true;
-                //}
+                    //}
 
-                // is this car fitter than the fittest car?
-                if (geneticCar.getFitness() > this.fittestGeneticCar.getFitness()) {
-                    this.fittestGeneticCar = geneticCar;
+                    // is this car fitter than the fittest car?
+                    if (geneticCar.getFitness() > this.fittestGeneticCar.getFitness()) {
+                        this.fittestGeneticCar = geneticCar;
+                    }
                 }
             }
         }
@@ -105,31 +117,28 @@ public class Population {
         // Elitism -> always take the fittest element without change
         newPopulation.add(fittestCar(this.population));
 
+
         // Make collection of GeneticCars and their fitness, which will be their probability of being chosen for
         // next population
         RandomCollection<GeneticCar> randomCarCollection = new RandomCollection<GeneticCar>();
+        RandomCollection<GeneticCar> randomCarCollectionReduced;
         for (GeneticCar geneticCar : this.population) {
             randomCarCollection.add(geneticCar.getFitness(), geneticCar);
         }
 
         // now chose populationSize-1 times 2 parents and combine their dna
         while(newPopulation.size() < this.population.size()) {
-        //for (int i = 0; i < this.population.size()-1; i++) {
 
             // Choose first parent from whole dna pool
             GeneticCar geneticParent1 = randomCarCollection.next();
 
             // Make new collection without the first parent
-            RandomCollection<GeneticCar> randomCarCollectionReduced = new RandomCollection<GeneticCar>();
+            randomCarCollectionReduced = new RandomCollection<GeneticCar>();
             for (GeneticCar geneticCar : this.population) {
                 if (!geneticCar.equals(geneticParent1)) {
                     randomCarCollectionReduced.add(geneticCar.getFitness(), geneticCar);
                 }
             }
-
-            // chose 2 parents at random with their fitness as probability
-            //DNA parent1 = new DNA(randomCarCollection.next());
-            //DNA parent2 = new DNA(randomCarCollection.next());
 
             // choose second parent from restricted dna pool
             GeneticCar geneticParent2 = randomCarCollectionReduced.next();
@@ -138,8 +147,11 @@ public class Population {
             DNA parent1 = new DNA(geneticParent1);
             DNA parent2 = new DNA(geneticParent2);
 
+            // calculate weight for parent1
+            double p1weight = geneticParent1.getFitness()/(geneticParent1.getFitness() + geneticParent2.getFitness());
+
             // apply bitwise crossover and mutation
-            DNA child = DNA.bitwiseCrossover(parent1, parent2, 0.5);
+            DNA child = DNA.bitwiseCrossover(parent1, parent2, p1weight);
             child.applyMutation(this.mutationRate);
 
             // DNA class to List<byte[]>
@@ -268,6 +280,12 @@ public class Population {
 
     public Map getMap() {
         return this.map;
+    }
+
+    // changing the map
+    public void setMap(int mapNumber){
+        this.map = new Map(mapNumber);
+        this.doSelectionProcess();
     }
 
     public int getIteration() {

@@ -21,6 +21,7 @@ public class MapBuildingBlock {
     6 = curve top to left
 
      */
+    // map outline
     public static List<Line> formMapFromBlockData(int[][] data) {
         List<Line> lines = new ArrayList<Line>();
         for (int y = 0; y < data.length; y++) {
@@ -42,6 +43,23 @@ public class MapBuildingBlock {
 
                 } else if(data[y][x] == 6) {
                     lines.addAll(curveTopToLeftPiece(x*100, y*100));
+                }
+            }
+        }
+        return lines;
+    }
+
+    // checkpoints
+    public static List<Line> formCheckpointsFromBlockData(int[][] data) {
+        List<Line> lines = new ArrayList<Line>();
+        for (int y = 0; y < data.length; y++) {
+            for (int x = 0; x < data[y].length; x++) {
+                if (data[y][x] == 1) {
+                    lines.addAll(horizontalCheckpoint(x*100,y*100));
+
+                } else if(data[y][x] == 2) {
+                    lines.addAll(verticalCheckpoint(x*100, y*100));
+
                 }
             }
         }
@@ -119,6 +137,21 @@ public class MapBuildingBlock {
         lines.add(new Line(new Point(x, y+5), new Point(x+67, y+33)));
         lines.add(new Line(new Point(x+67, y+33), new Point(x+95, y+100)));
 
+        return lines;
+    }
+
+    /*
+    checkpoints
+     */
+    public static List<Line> horizontalCheckpoint(int x, int y) {
+        List<Line> lines = new ArrayList<Line>();
+        lines.add(new Line(new Point(x+10,y+50), new Point(x+90,y+50)));
+        return lines;
+    }
+
+    public static List<Line> verticalCheckpoint(int x, int y) {
+        List<Line> lines = new ArrayList<Line>();
+        lines.add(new Line(new Point(x+50,y+10), new Point(x+50,y+90)));
         return lines;
     }
 

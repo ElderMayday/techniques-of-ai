@@ -43,20 +43,20 @@ public class GeneticCar extends Car {
         try {
             double [] output = this.neuralNet.GetOutput(input);
 
-            if (output[0] <= 0 + this.acceptanceRate) {
+            if (output[0] >= 1 - this.acceptanceRate) {
                 super.goLeft();
-            } else if (output[0] >= 1 - this.acceptanceRate) {
+            }
+            if (output[1] >= 1 - this.acceptanceRate) {
                 super.goRight();
             }
 
             /*
-            if (output[0] > this.acceptanceRate) {
-                super.goLeft();
+            if (output[2] >= 1 - this.acceptanceRate) {
+                super.goBreak();
             }
-            if (output[1] > this.acceptanceRate) {
-                super.goRight();
+            if (output[3] >= 1 - this.acceptanceRate) {
+                super.goAccelerate();
             }*/
-
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -32,7 +32,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     private boolean paint = true;          // hotkey 'P' - paint visuals or not
     private boolean playInRealTime = true;  // hotkey 'R' - display the learning in real time or dont care for visuals
 
-    private Population population = new Population(15,0.05,6);
+    private Population population = new Population(15,0.35,6);
 
     @Override
     public void init() {
@@ -69,7 +69,6 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     public void run() {
 
         while (true) {
-
 
             this.population.doMoves();
 

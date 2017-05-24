@@ -13,6 +13,10 @@ public class Car {
     public static final double turningSpeed = 1.5;
     public static final int visionRange = 200;
 
+    private double currSpeed;
+    public static final double acceleration = 0.5;
+    public static final double max_speed = 10;
+
     public static int carLength = 20;
     public static int carWidth = 10;
 
@@ -60,8 +64,8 @@ public class Car {
         if (this.crashed) {
             return;
         }
-        double xPlus = Math.cos(Math.toRadians(this.degree)) * Car.speed;
-        double yPlus = Math.sin(Math.toRadians(this.degree)) * Car.speed;
+        double xPlus = Math.cos(Math.toRadians(this.degree)) * Car.speed; //this.currSpeed;//Car.speed;
+        double yPlus = Math.sin(Math.toRadians(this.degree)) * Car.speed; //this.currSpeed;//Car.speed;
 
         this.x += xPlus;
         this.y += yPlus;
@@ -90,15 +94,35 @@ public class Car {
     }
 
 
+    public void goAccelerate() {
+
+        this.currSpeed += Car.acceleration;
+        if (this.currSpeed > Car.max_speed) {
+            this.currSpeed = Car.max_speed;
+        }
+
+    }
+
+    public void goBreak() {
+
+        this.currSpeed -= 2 * Car.acceleration;
+        if (this.currSpeed < 0) {
+            this.currSpeed = 0;
+        }
+
+    }
+
     public void goRight() {
-        if (!this.crashed) {
-            this.degree = (this.degree + turningSpeed) % 360;
+        if (!this.crashed ){//&& this.currSpeed > 0) {
+            //this.degree = (this.degree + turningSpeed) % 360;
+            this.degree = (this.degree + (Car.speed / 2)) % 360;
         }
     }
 
     public void goLeft() {
-        if (!this.crashed) {
-            this.degree -= turningSpeed;
+        if (!this.crashed){// && this.currSpeed > 0) {
+            //this.degree -= turningSpeed;
+            this.degree -= (Car.speed / 2);
             if (this.degree < 0) {
                 this.degree = 360;
             }
@@ -253,6 +277,10 @@ public class Car {
         this.y = y;
         this.degree = degree;
         this.crashed = false;
+    }
+
+    public double getCurrSpeed() {
+        return this.currSpeed;
     }
 
 }

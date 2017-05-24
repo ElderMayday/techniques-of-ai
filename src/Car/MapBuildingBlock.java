@@ -25,7 +25,6 @@ public class MapBuildingBlock {
         List<Line> lines = new ArrayList<Line>();
         for (int y = 0; y < data.length; y++) {
             for (int x = 0; x < data[y].length; x++) {
-                System.out.println("hello");
                 if (data[y][x] == 1) {
                     lines.addAll(verticalPiece(x*100,y*100));
 

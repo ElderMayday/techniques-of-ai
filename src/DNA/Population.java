@@ -27,7 +27,7 @@ public class Population {
 
     private Map map;
 
-    public static int[] neuralNetworkLayerSize = new int[]{Car.degrees.size(), 3, 1};
+    public static int[] neuralNetworkLayerSize = new int[]{Car.degrees.size(), 5, 2};//5};//5};
     public static double neuralNetworkAcceptanceRate = 0.1;
 
     // Pointer for the fittest car that the GA produced
@@ -63,7 +63,11 @@ public class Population {
                 geneticCar.checkWallIntersection(this.map.getLines());
                 geneticCar.checkCheckpointIntersection(this.map.getCheckpoints());
                 geneticCar.makeNNdecision();
-                carsAreSimulating = true;
+
+                // uncomment this when wanting speed factors per car
+                //if (geneticCar.getCurrSpeed() > 0) {
+                    carsAreSimulating = true;
+                //}
 
                 // is this car fitter than the fittest car?
                 if (geneticCar.getFitness() > this.fittestGeneticCar.getFitness()) {
@@ -71,7 +75,6 @@ public class Population {
                 }
             }
         }
-
 
         /*
         int addNcars = 0;
@@ -113,9 +116,27 @@ public class Population {
         while(newPopulation.size() < this.population.size()) {
         //for (int i = 0; i < this.population.size()-1; i++) {
 
+            // Choose first parent from whole dna pool
+            GeneticCar geneticParent1 = randomCarCollection.next();
+
+            // Make new collection without the first parent
+            RandomCollection<GeneticCar> randomCarCollectionReduced = new RandomCollection<GeneticCar>();
+            for (GeneticCar geneticCar : this.population) {
+                if (!geneticCar.equals(geneticParent1)) {
+                    randomCarCollectionReduced.add(geneticCar.getFitness(), geneticCar);
+                }
+            }
+
             // chose 2 parents at random with their fitness as probability
-            DNA parent1 = new DNA(randomCarCollection.next());
-            DNA parent2 = new DNA(randomCarCollection.next());
+            //DNA parent1 = new DNA(randomCarCollection.next());
+            //DNA parent2 = new DNA(randomCarCollection.next());
+
+            // choose second parent from restricted dna pool
+            GeneticCar geneticParent2 = randomCarCollectionReduced.next();
+
+            // transform both parents into a dna string
+            DNA parent1 = new DNA(geneticParent1);
+            DNA parent2 = new DNA(geneticParent2);
 
             // apply bitwise crossover and mutation
             DNA child = DNA.bitwiseCrossover(parent1, parent2, 0.5);

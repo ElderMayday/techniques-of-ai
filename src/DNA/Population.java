@@ -35,7 +35,7 @@ public class Population {
 
     // defines how many iterations it takes so that a car in the list starts
     // set at 5: car1 starts at iteration 0, car 2 at 5, car 3 at 10, etc.
-    public static int deferredStart = 5;
+    public static int deferredStart = 3;
 
     // Pointer for the fittest car that the GA produced
     private GeneticCar fittestGeneticCar;
@@ -128,10 +128,7 @@ public class Population {
                     geneticCar.checkCheckpointIntersection(this.map.getCheckpoints());
                     geneticCar.makeNNdecision();
 
-                    // uncomment this when wanting speed factors per car
-                    //if (geneticCar.getCurrSpeed() > 0) {
                     carsAreSimulating = true;
-                    //}
 
                     // is this car fitter than the fittest car?
                     if (geneticCar.getFitness() > this.fittestGeneticCar.getFitness()) {
@@ -162,13 +159,6 @@ public class Population {
         // Elitism -> always take the fittest element without change
         newPopulation.add(fittestCar(this.population));
 
-        // 1/2 of all new population is a mutated version of the fittest car
-        /*
-        for (int i = 0; i < this.population.size()/2; i++){
-            DNA fittestDNA = new DNA(newPopulation.get(0));
-            fittestDNA.applyMutation(this.mutationRate);
-            newPopulation.add(createGeneticCarFromDNA(fittestDNA));
-        }*/
 
         // Make collection of GeneticCars and their fitness, which will be their probability of being chosen for
         // next population
@@ -204,7 +194,6 @@ public class Population {
 
             // calculate weight for parent1
             //double p1weight = geneticParent1.getFitness()/(geneticParent1.getFitness() + geneticParent2.getFitness());
-            //double p1weight = 0.5;
 
             // apply bitwise crossover and mutation
             DNA child = DNA.bitwiseCrossover(parent1, parent2, 0.5);

@@ -32,7 +32,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     private boolean paint = true;          // hotkey 'P' - paint visuals or not
     private boolean playInRealTime = true;  // hotkey 'R' - display the learning in real time or dont care for visuals
 
-    private Population population = new Population(20,0.05,7, true);
+    private Population population = new Population(30,0.05,7, false);
 
     @Override
     public void init() {
@@ -212,27 +212,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent arg0) {
-        /*
-        if (initialized == false) {
-            initialized = true;
-            lastX = arg0.getX();
-		    lastY = arg0.getY();
-        } else {
-            int x = arg0.getX();
-            int y = arg0.getY();
 
-		    Line l = new Line(new Point(lastX, lastY), new Point(x,y));
-		    createLines.add(l);
-
-		    String o = "this.addLine(new Line(new Point("+lastX+","+lastY+"), new Point("+x+ ","+y+")));";
-		    System.out.println(o);
-		    lastX = x;
-		    lastY = y;
-
-		    //uncomment line for checkpoints
-		    initialized = false;
-        }
-        */
     }
 
     @Override

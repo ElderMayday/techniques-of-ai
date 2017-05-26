@@ -50,14 +50,6 @@ public class GeneticCar extends Car {
                 super.goRight();
             }
 
-            /*
-            if (output[2] >= 1 - this.acceptanceRate) {
-                super.goBreak();
-            }
-            if (output[3] >= 1 - this.acceptanceRate) {
-                super.goAccelerate();
-            }*/
-
         } catch (Exception e) {
             e.printStackTrace();
         }

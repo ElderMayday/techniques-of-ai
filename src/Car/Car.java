@@ -56,7 +56,6 @@ public class Car {
     public void addCheckpoints(ArrayList<Line> checkpoints) {
         this.checkpoints = new ArrayList<Line>(checkpoints);
         this.crossedCheckpoints = 0;
-        //return this;
     }
 
     // update position of the car - dependence on degree and speed
@@ -113,15 +112,13 @@ public class Car {
     }
 
     public void goRight() {
-        if (!this.crashed ){//&& this.currSpeed > 0) {
-            //this.degree = (this.degree + turningSpeed) % 360;
+        if (!this.crashed ){
             this.degree = (this.degree + Car.turningSpeed) % 360;
         }
     }
 
     public void goLeft() {
-        if (!this.crashed){// && this.currSpeed > 0) {
-            //this.degree -= turningSpeed;
+        if (!this.crashed){
             this.degree -= Car.turningSpeed;
             if (this.degree < 0) {
                 this.degree = 360;

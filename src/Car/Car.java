@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Created by root on 3/21/17.
  */
 public class Car {
-    public static final double speed = 2.0;
+    public static final double speed = 2;
     public static final double turningSpeed = 1.5;
     public static final int visionRange = 200;
 
@@ -115,14 +115,14 @@ public class Car {
     public void goRight() {
         if (!this.crashed ){//&& this.currSpeed > 0) {
             //this.degree = (this.degree + turningSpeed) % 360;
-            this.degree = (this.degree + (Car.speed / 2)) % 360;
+            this.degree = (this.degree + Car.turningSpeed) % 360;
         }
     }
 
     public void goLeft() {
         if (!this.crashed){// && this.currSpeed > 0) {
             //this.degree -= turningSpeed;
-            this.degree -= (Car.speed / 2);
+            this.degree -= Car.turningSpeed;
             if (this.degree < 0) {
                 this.degree = 360;
             }

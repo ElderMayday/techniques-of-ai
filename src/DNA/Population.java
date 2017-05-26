@@ -8,7 +8,6 @@ import neuralNet.NeuralNet;
 import neuralNet.Sigmoid;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class Population {
     private Map map;
 
     public static int[] neuralNetworkLayerSize = new int[]{Car.degrees.size(),5, 2};//5, 2};;
-    public static double neuralNetworkAcceptanceRate = 0.1;
+    public static double neuralNetworkAcceptanceRate = 0.01;
 
     // defines how many iterations it takes so that a car in the list starts
     // set at 5: car1 starts at iteration 0, car 2 at 5, car 3 at 10, etc.
@@ -88,20 +87,6 @@ public class Population {
             }
         }
 
-        /*
-        int addNcars = 0;
-        for (Iterator<GeneticCar> iterator = this.population.iterator(); iterator.hasNext(); ){
-            GeneticCar geneticCar = iterator.next();
-            if (geneticCar.isCrashed()) {
-                iterator.remove();
-                addNcars++;
-            }
-        }
-
-        for (int i = 0; i < addNcars; i++) {
-            this.population.add(getNewGeneticCar());
-        }*/
-
         // No car is moving anymore -> new population
         // Simulation ran too long -> new population
         if (!carsAreSimulating || this.iteration > Population.MAX_ITERATIONS) {
@@ -117,6 +102,13 @@ public class Population {
         // Elitism -> always take the fittest element without change
         newPopulation.add(fittestCar(this.population));
 
+        // 1/2 of all new population is a mutated version of the fittest car
+        /*
+        for (int i = 0; i < this.population.size()/2; i++){
+            DNA fittestDNA = new DNA(newPopulation.get(0));
+            fittestDNA.applyMutation(this.mutationRate);
+            newPopulation.add(createGeneticCarFromDNA(fittestDNA));
+        }*/
 
         // Make collection of GeneticCars and their fitness, which will be their probability of being chosen for
         // next population
@@ -133,6 +125,7 @@ public class Population {
             GeneticCar geneticParent1 = randomCarCollection.next();
 
             // Make new collection without the first parent
+
             randomCarCollectionReduced = new RandomCollection<GeneticCar>();
             for (GeneticCar geneticCar : this.population) {
                 if (!geneticCar.equals(geneticParent1)) {
@@ -141,43 +134,23 @@ public class Population {
             }
 
             // choose second parent from restricted dna pool
-            GeneticCar geneticParent2 = randomCarCollectionReduced.next();
+            //GeneticCar geneticParent2 = randomCarCollectionReduced.next();
+
+            GeneticCar geneticParent2 = randomCarCollection.next();
 
             // transform both parents into a dna string
             DNA parent1 = new DNA(geneticParent1);
             DNA parent2 = new DNA(geneticParent2);
 
             // calculate weight for parent1
-            double p1weight = geneticParent1.getFitness()/(geneticParent1.getFitness() + geneticParent2.getFitness());
+            //double p1weight = geneticParent1.getFitness()/(geneticParent1.getFitness() + geneticParent2.getFitness());
+            //double p1weight = 0.5;
 
             // apply bitwise crossover and mutation
-            DNA child = DNA.bitwiseCrossover(parent1, parent2, p1weight);
+            DNA child = DNA.bitwiseCrossover(parent1, parent2, 0.5);
             child.applyMutation(this.mutationRate);
 
-            // DNA class to List<byte[]>
-            List<byte[]> childByteList = NeuralNet.byteArrayToByteList(child.getDNA());
-
-            // Create the NeuralNetwork with the resulting DNA
-            NeuralNet childNeuralNetwork;
-            try {
-                childNeuralNetwork = new NeuralNet(neuralNetworkLayerSize, new Sigmoid(1.0), 0.5);
-                childNeuralNetwork.setWeightsFromByteList(childByteList);
-
-                // Create the GeneticCar object
-                GeneticCar geneticCarChild = new GeneticCar(this.map.getStartX(), this.map.getStartY(), this.map.getStartDegree(),
-                        neuralNetworkLayerSize, neuralNetworkAcceptanceRate);
-                geneticCarChild.addCheckpoints(this.map.getCheckpoints());
-
-                // Give it the new DNA for the Neural Network
-                geneticCarChild.setNeuralNet(childNeuralNetwork);
-
-                // add child to new population
-                newPopulation.add(geneticCarChild);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            newPopulation.add(createGeneticCarFromDNA(child));
         }
 
         this.population = newPopulation;
@@ -185,50 +158,25 @@ public class Population {
 
     }
 
-    private GeneticCar getNewGeneticCar() {
-
-        // Make collection of GeneticCars and their fitness, which will be their probability of being chosen for
-        // next population
-        RandomCollection<GeneticCar> randomCarCollection = new RandomCollection<GeneticCar>();
-        boolean fittestWasAdded = false;
-        for (GeneticCar geneticCar : this.population) {
-            randomCarCollection.add(geneticCar.getFitness(), geneticCar);
-            if (geneticCar.equals(this.fittestGeneticCar)) {
-                fittestWasAdded = true;
-            }
-        }
-
-        if (!fittestWasAdded) {
-            randomCarCollection.add(this.fittestGeneticCar.getFitness(), this.fittestGeneticCar);
-        }
-
-        // chose 2 parents at random with their fitness as probability
-        DNA parent1 = new DNA(randomCarCollection.next());
-        DNA parent2 = new DNA(randomCarCollection.next());
-
-        // apply bitwise crossover and mutation
-        DNA child = DNA.bitwiseCrossover(parent1, parent2, 0.5);
-        child.applyMutation(this.mutationRate);
-
-        // DNA class to List<byte[]>
-        List<byte[]> childByteList = NeuralNet.byteArrayToByteList(child.getDNA());
+    private GeneticCar createGeneticCarFromDNA(DNA dna){
+        List<byte[]> byteList = NeuralNet.byteArrayToByteList(dna.getDNA());
 
         // Create the NeuralNetwork with the resulting DNA
-        NeuralNet childNeuralNetwork;
+        NeuralNet neuralNetwork;
         try {
-            childNeuralNetwork = new NeuralNet(neuralNetworkLayerSize, new Sigmoid(1.0), 0.5);
-            childNeuralNetwork.setWeightsFromByteList(childByteList);
+            neuralNetwork = new NeuralNet(neuralNetworkLayerSize, new Sigmoid(1.0), 0.5);
+            neuralNetwork.setWeightsFromByteList(byteList);
 
             // Create the GeneticCar object
-            GeneticCar geneticCarChild = new GeneticCar(this.map.getStartX(), this.map.getStartY(), this.map.getStartDegree(),
+            GeneticCar geneticCar = new GeneticCar(this.map.getStartX(), this.map.getStartY(), this.map.getStartDegree(),
                     neuralNetworkLayerSize, neuralNetworkAcceptanceRate);
-            geneticCarChild.addCheckpoints(this.map.getCheckpoints());
+            geneticCar.addCheckpoints(this.map.getCheckpoints());
 
             // Give it the new DNA for the Neural Network
-            geneticCarChild.setNeuralNet(childNeuralNetwork);
+            geneticCar.setNeuralNet(neuralNetwork);
 
             // add child to new population
-            return geneticCarChild;
+            return geneticCar;
 
         } catch (Exception e) {
             e.printStackTrace();

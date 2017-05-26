@@ -32,7 +32,7 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
     private boolean paint = true;          // hotkey 'P' - paint visuals or not
     private boolean playInRealTime = true;  // hotkey 'R' - display the learning in real time or dont care for visuals
 
-    private Population population = new Population(20,0.05,7);
+    private Population population = new Population(20,0.05,7, true);
 
     @Override
     public void init() {
@@ -155,6 +155,11 @@ public class GUI extends Applet implements Runnable, KeyListener, MouseListener{
 
             case KeyEvent.VK_R:
                 this.playInRealTime = !playInRealTime;
+                break;
+
+            // save fitness history to csv
+            case KeyEvent.VK_S:
+                this.population.writeFitnessGenerationToFile();
                 break;
 
             // map change

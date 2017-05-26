@@ -10,6 +10,10 @@ import neuralNet.Sigmoid;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 /**
  * Created by root on 3/23/17.
  */
@@ -36,13 +40,19 @@ public class Population {
     // Pointer for the fittest car that the GA produced
     private GeneticCar fittestGeneticCar;
 
-    public Population(int populationSize, double mutationRate, int map) {
+    // Saving the history of the fitness per generation
+    private boolean saveFitnessHistory;
+    private List<HistoryTriple> fitnessHistory;
+
+    public Population(int populationSize, double mutationRate, int map, boolean saveFitnessHistory) {
         this.mutationRate = mutationRate;
         this.population = new ArrayList<GeneticCar>();
         this.generation = 1;
         this.iteration = 0;
 
         this.map = new Map(map);
+
+        this.saveFitnessHistory = saveFitnessHistory;
 
         // Initialize the random population
         for (int i = 0; i < populationSize; i++) {
@@ -55,6 +65,50 @@ public class Population {
 
         this.fittestGeneticCar = this.population.get(0);
 
+        if (this.saveFitnessHistory) {
+            this.fitnessHistory = new ArrayList<HistoryTriple>();
+        }
+
+    }
+
+    public void writeFitnessGenerationToFile(){
+        // save the fitness over generations
+        if (this.saveFitnessHistory) {
+            try {
+                PrintWriter pw = new PrintWriter(new File("/home/raymond/IdeaWorkspace/techniques-of-ai/fitness.csv"));
+                StringBuilder sb = new StringBuilder();
+
+                //header
+                sb.append("generation");
+                sb.append(',');
+                sb.append("avg_fitness");
+                sb.append(',');
+                sb.append("highest_fitness");
+                sb.append(',');
+                sb.append("lowest_fitness");
+                sb.append('\n');
+
+                // iterating every entry
+                for (int i = 0; i < this.fitnessHistory.size(); i++) {
+                    sb.append(i);
+                    sb.append(',');
+                    sb.append(this.fitnessHistory.get(i).getAvg());
+                    sb.append(',');
+                    sb.append(this.fitnessHistory.get(i).getHighest());
+                    sb.append(',');
+                    sb.append(this.fitnessHistory.get(i).getLowest());
+                    sb.append('\n');
+                }
+
+                pw.write(sb.toString());
+                pw.close();
+                System.out.println("Saved fitness history to file");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Fitness history flag not set");
+        }
     }
 
     // Do the movement for the whole car population
@@ -90,6 +144,12 @@ public class Population {
         // No car is moving anymore -> new population
         // Simulation ran too long -> new population
         if (!carsAreSimulating || this.iteration > Population.MAX_ITERATIONS) {
+            // add fitness data of current generation
+            if (this.saveFitnessHistory) {
+                this.fitnessHistory.add(new HistoryTriple(this.getTotalFitnessOfPopulation() / this.population.size(),
+                        this.getBestCarFitness(this.population),
+                        this.getWorstCarFitness(this.population)));
+            }
             doSelectionProcess();
         }
     }
@@ -197,10 +257,34 @@ public class Population {
         GeneticCar returnMe = new GeneticCar(this.map.getStartX(), this.map.getStartY(), this.map.getStartDegree(),
                 neuralNetworkLayerSize, neuralNetworkAcceptanceRate);
         returnMe.addCheckpoints(this.map.getCheckpoints());
-
         returnMe.setNeuralNet(fittest.getNeuralNet());
 
         return returnMe;
+    }
+
+
+
+    //returns the worst performing car
+    public double getWorstCarFitness(List<GeneticCar> carList){
+        double worst = carList.get(0).getFitness();
+
+        for (GeneticCar car : carList) {
+            if (car.getFitness() < worst) {
+                worst = car.getFitness();
+            }
+        }
+        return worst;
+    }
+
+    public double getBestCarFitness(List<GeneticCar> carList){
+        double best = carList.get(0).getFitness();
+
+        for (GeneticCar car : carList) {
+            if (car.getFitness() > best) {
+                best = car.getFitness();
+            }
+        }
+        return best;
     }
 
     public double getTotalFitnessOfPopulation() {
@@ -210,6 +294,8 @@ public class Population {
         }
         return fitness;
     }
+
+
 
     // Set coordinates and degree to starting point of map for all elements in the population
     private void initializeCoordinates() {
@@ -239,4 +325,5 @@ public class Population {
     public int getIteration() {
         return this.iteration;
     }
+
 }

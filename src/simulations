@@ -1,0 +1,9 @@
+Generation ~4800: drives through map 2
+settings:
+Population:
+    public static int MAX_ITERATIONS = 2000;
+    public static int[] neuralNetworkLayerSize = new int[]{5, 5, 2};
+    public static double neuralNetworkAcceptanceRate = 0.9;
+
+GUI
+    private Population population = new Population(20,0.02,2);
